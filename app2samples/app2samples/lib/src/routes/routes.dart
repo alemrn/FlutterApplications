@@ -1,5 +1,6 @@
 import 'package:app2samples/src/Pages/animated_contained.dart';
 import 'package:app2samples/src/Pages/card_page.dart';
+import 'package:app2samples/src/Pages/inpupt_page.dart';
 import 'package:flutter/material.dart';
 
 import 'package:app2samples/src/Pages/HomePage.dart';
@@ -13,5 +14,6 @@ Map<String, WidgetBuilder> getApplicationRoutes() {
     'avatar': (BuildContext context) => AvatarPage(),
     'card': (BuildContext context) => CardPage(),
     'animatedContainer': (BuildContext) => AnimatedContaierPage(),
+    'inputs': (BuildContext) => InputPage(),
   };
 }
