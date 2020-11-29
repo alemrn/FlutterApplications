@@ -15,6 +15,8 @@ class Peliculas {
 }
 
 class Pelicula {
+  String uniqueId;
+
   double popularity;
   bool adult;
   String backdropPath;
@@ -50,7 +52,7 @@ class Pelicula {
   Pelicula.fromJsonMap(Map<String, dynamic> json) {
     popularity = json['popularity'] / 1;
     adult = json['adult'];
-    backdropPath = json['backdro_path'];
+    backdropPath = json['backdrop_path'];
     genreIds = json['genre_ids'].cast<int>();
     originalLanguage = json['original_language'];
     originalTitle = json['original_title'];
@@ -59,7 +61,7 @@ class Pelicula {
     video = json['video'];
     voteAverage = json['vote_average'] / 1;
     voteCount = json['vote_count'];
-    overview = json[' overview'];
+    overview = json['overview'];
     releaseDate = json['release_date'];
     title = json['title'];
   }
@@ -69,5 +71,12 @@ class Pelicula {
       return 'https://farm5.staticflickr.com/4363/36346283311_74018f6e7d_o.png';
     }
     return 'https://image.tmdb.org/t/p/w500/$posterPath';
+  }
+
+  getBackgroundImg() {
+    if (backdropPath == null) {
+      return 'https://farm5.staticflickr.com/4363/36346283311_74018f6e7d_o.png';
+    }
+    return 'https://image.tmdb.org/t/p/w500/$backdropPath';
   }
 }
