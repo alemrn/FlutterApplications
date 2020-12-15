@@ -18,12 +18,31 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text('QrApplication'),
       ),
-      body: Column(children: [
-        Divider(),
-        _crearInput(),
-        Divider(),
-        _crearQrImage(),
-      ]),
+      body: Column(
+        children: [
+          Divider(),
+          Row(
+            children: [
+              _crearInput(),
+            ],
+          ),
+          Divider(),
+          //_crearQrImage(),
+          FlatButton(
+            color: Colors.black,
+            child: Text('Show QR'),
+            onPressed: () {
+              print('Show QR Button pressed');
+            },
+          ),
+          Row(
+            children: [
+              _createButtons(Icons.add),
+              _createButtons(Icons.remove),
+            ],
+          ),
+        ],
+      ),
     );
   }
 
@@ -33,15 +52,7 @@ class _HomePageState extends State<HomePage> {
       style: TextStyle(fontSize: 18.0),
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
-        border: OutlineInputBorder(
-          borderSide: BorderSide(width: 16.0, color: Colors.lightBlue.shade50),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        hintText: 'Texto de sugerencia',
-        labelText: 'QRData',
-        helperText: 'Solo el nombre',
-        suffixIcon: Icon(Icons.accessibility),
-        icon: Icon(Icons.account_circle),
+        hintText: 'QRData',
       ),
       onChanged: (valor) {
         setState(() {
@@ -58,6 +69,25 @@ class _HomePageState extends State<HomePage> {
         data: _data,
         version: QrVersions.auto,
         size: _screenSize.width,
+      ),
+    );
+  }
+
+  Widget _createButtons(IconData add) {
+    return Center(
+      child: InkWell(
+        child: Container(
+          color: Colors.black54,
+          width: 40,
+          height: 40,
+          child: ClipRRect(
+            child: Icon(add),
+            borderRadius: BorderRadius.circular(20),
+          ),
+        ),
+        onTap: (){
+          print('Button pressed');
+        },
       ),
     );
   }
