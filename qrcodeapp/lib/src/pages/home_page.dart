@@ -72,6 +72,14 @@ class _HomePageState extends State<HomePage> {
             children: [
               Text('Qr Code with : $_data'),
               Divider(),
+              Text(
+                'Data ',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  backgroundColor: Colors.amber,
+                  fontSize: 14,
+                ),
+              ),
               Container(
                 width: _screenSize.width,
                 height: _screenSize.height,
