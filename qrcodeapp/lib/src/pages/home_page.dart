@@ -19,18 +19,27 @@ class _HomePageState extends State<HomePage> {
         title: Text('QrApplication'),
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          Divider(),
           _crearInput(),
-          Divider(),
-          FlatButton(
-            color: Colors.black,
-            child: Text('Show QR'),
-            onPressed: () {
-              _crearQrImage(context);
-            },
+          ClipRRect(
+            borderRadius: BorderRadius.circular(20.0),
+            child: FlatButton(
+              color: Colors.lime[800],
+              child: Text(
+                'Show QR',
+                style: TextStyle(
+                  fontSize: 30.0,
+                ),
+              ),
+              onPressed: () {
+                _crearQrImage(context);
+              },
+            ),
           ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               _createButtons(Icons.add),
               _createButtons(Icons.remove),
@@ -42,19 +51,23 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _crearInput() {
-    return TextField(
-      //autofocus: true,
-      style: TextStyle(fontSize: 18.0),
-      textCapitalization: TextCapitalization.sentences,
-      decoration: InputDecoration(
-        hintText: 'QRData',
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+      child: TextField(
+        //autofocus: true,
+        style: TextStyle(fontSize: 18.0),
+        textAlign: TextAlign.center,
+        textCapitalization: TextCapitalization.sentences,
+        decoration: InputDecoration(
+          hintText: 'QR Code',
+        ),
+        onChanged: (valor) {
+          setState(() {
+            _data = valor;
+            print(_data);
+          });
+        },
       ),
-      onChanged: (valor) {
-        setState(() {
-          _data = valor;
-          print(_data);
-        });
-      },
     );
   }
 
@@ -64,16 +77,14 @@ class _HomePageState extends State<HomePage> {
       barrierDismissible: true,
       builder: (context) {
         return AlertDialog(
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20.0),
+          ),
           title: Text('QR Alert Dialog'),
           content: Column(
-            mainAxisSize: MainAxisSize.min,
             children: [
-              Text('Qr Code with : $_data'),
-              Divider(),
               Text(
-                'Data ',
+                'Qr Code with : $_data',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   backgroundColor: Colors.amber,
@@ -83,21 +94,37 @@ class _HomePageState extends State<HomePage> {
               Container(
                 width: _screenSize.width,
                 height: _screenSize.height,
-                child: QrImage(
-                  data: _data,
-                  version: QrVersions.auto,
+                child: Expanded(
+                  child: QrImage(
+                    data: _data,
+                    version: QrVersions.auto,
+                  ),
                 ),
               ),
             ],
           ),
           actions: [
             FlatButton(
-              onPressed: () {},
-              child: Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text(
+                'Cancel',
+                style: TextStyle(
+                  fontSize: 13,
+                ),
+              ),
             ),
             FlatButton(
-              onPressed: () {},
-              child: Text('Ok'),
+              onPressed: () {
+                Navigator.pushNamed(context, 'QRCode', arguments: _data);
+              },
+              child: Text(
+                'Ok',
+                style: TextStyle(
+                  fontSize: 13,
+                ),
+              ),
             ),
           ],
         );
@@ -106,20 +133,32 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _createButtons(IconData add) {
-    return Center(
-      child: InkWell(
-        child: Container(
-          color: Colors.black54,
-          width: 40,
-          height: 40,
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 10.0),
+      child: Center(
+        child: InkWell(
           child: ClipRRect(
-            child: Icon(add),
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(50),
+            child: Container(
+              color: Colors.black54,
+              width: ((_screenSize.width > _screenSize.height)
+                      ? _screenSize.height
+                      : _screenSize.width) *
+                  0.2,
+              height: ((_screenSize.width > _screenSize.height)
+                      ? _screenSize.height
+                      : _screenSize.width) *
+                  0.2,
+              child: ClipRRect(
+                child: Icon(add),
+                borderRadius: BorderRadius.circular(20),
+              ),
+            ),
           ),
+          onTap: () {
+            print('Button pressed');
+          },
         ),
-        onTap: () {
-          print('Button pressed');
-        },
       ),
     );
   }
