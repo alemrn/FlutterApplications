@@ -23,9 +23,12 @@ class _SettingsPageState extends State<SettingsPage> {
     // TODO: implement initState
     super.initState();
 
+    prefs.ultimaPagina = SettingsPage.routeName;
+
     _nombre = prefs.nombre;
     _genero = prefs.genero;
     _colorsecundario = prefs.colorSecundario;
+
     _textController = new TextEditingController(text: _nombre);
   }
 
@@ -52,6 +55,7 @@ class _SettingsPageState extends State<SettingsPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Settings'),
+        backgroundColor: (prefs.colorSecundario) ? Colors.teal : Colors.blue,
       ),
       drawer: MenuWidget(),
       body: ListView(

@@ -25,7 +25,7 @@ class PreferenciasUsuario {
   }
 
   get nombre {
-    return _prefs.getString('nombre') ?? 'Pedro';
+    return _prefs.getString('nombre') ?? ' ';
   }
 
   set nombre(String value) {
@@ -38,5 +38,13 @@ class PreferenciasUsuario {
 
   set colorSecundario(bool value) {
     _prefs.setBool('color', value);
+  }
+
+  get ultimaPagina {
+    return _prefs.getString('ultimaPagina') ?? 'home';
+  }
+
+  set ultimaPagina(String value) {
+    _prefs.setString('ultimaPagina', value);
   }
 }
