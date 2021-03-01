@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
     final prefs = new PreferenciasUsuario();
     return MaterialApp(
       title: 'Preferences',
-      initialRoute: prefs.ultimaPagina,
+      initialRoute: HomePage.routeName,
       debugShowCheckedModeBanner: false,
       routes: {
         HomePage.routeName: (_) => HomePage(),
