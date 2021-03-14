@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:formvalidation/src/blocs/login_block.dart';
 import 'package:formvalidation/src/blocs/provider.dart';
+import 'package:formvalidation/src/providers/usuario_provider.dart';
+import 'package:formvalidation/src/utils/utils.dart';
 
 class LoginPage extends StatelessWidget {
+  final usuarioProvider = new UsuarioProvider();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -133,15 +137,15 @@ class LoginPage extends StatelessWidget {
               ],
             ),
           ),
-          RaisedButton(
+          FlatButton(
             child: Text(
-              'Olvidó la contraseña',
+              'Crear nueva cuenta',
               style: TextStyle(
                 color: Colors.blue,
               ),
             ),
-            onPressed: () {},
-            elevation: 0.0,
+            onPressed: () =>
+                Navigator.pushReplacementNamed(context, 'registro'),
             color: Colors.transparent,
           ),
           SizedBox(
@@ -222,12 +226,13 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  _login(LoginBloc bloc, BuildContext context) {
-    print('==========');
-    print('Email: ${bloc.email} ');
-    print('Password: ${bloc.password}');
-    print('==========');
+  _login(LoginBloc bloc, BuildContext context) async {
+    Map info = await usuarioProvider.login(bloc.email, bloc.password);
 
-    Navigator.pushNamed(context, 'home');
+    if (info['ok']) {
+      Navigator.pushNamed(context, 'home');
+    } else {
+      mostrarAlerta(context, info['mensaje']);
+    }
   }
 }
