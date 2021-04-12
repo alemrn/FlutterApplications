@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:headers/src/pages/slideshow_page.dart';
+import 'package:headers/src/pages/emergency_page.dart';
+// import 'package:headers/src/pages/pinterest_page.dart';
+// import 'package:headers/src/pages/slideshow_page.dart';
 //import 'package:headers/src/pages/graficcas_circulares_page.dart';
 // import 'package:headers/src/pages/animaciones_pages.dart';
 // import 'package:headers/src/pages/headers_page.dart';
@@ -17,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: SlideshowPage(),
+      home: EmergencyPage(),
     );
   }
 }
