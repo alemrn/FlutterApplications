@@ -1,0 +1,6 @@
+{
+    "rest-client.fontFamily": "Ubuntu Mono Regular, Ubuntu Mono, 'Ubuntu', Baloo 2 Regular, Meslo LG S, Meslo LG M, Meslo LG L, Consolas, Meslo LG, monospaceUbuntu Mono Regular, Ubuntu Mono, 'Ubuntu', Baloo 2 Regular, Meslo LG S, Meslo LG M, Meslo LG L, Consolas, Meslo LG, monospace",
+    "editor.fontFamily": "'Ubuntu Mono'",
+    "editor.inlineHints.fontFamily": "default",
+    "editor.codeLensFontFamily": "default"
+}
