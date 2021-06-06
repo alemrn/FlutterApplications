@@ -3,7 +3,9 @@ import 'package:chatapp/Widgets/custom_input.dart';
 import 'package:chatapp/Widgets/label_widget.dart';
 import 'package:chatapp/Widgets/logo_widget.dart';
 import 'package:chatapp/routes/routes.dart';
+import 'package:chatapp/services/auth_service.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatelessWidget {
   @override
@@ -45,8 +47,9 @@ class __FormState extends State<_Form> {
 
   @override
   Widget build(BuildContext context) {
+    final authService = Provider.of<AuthService>(context);
     return Container(
-      margin: EdgeInsets.only(top: 40),
+      margin: EdgeInsets.only(top: 20),
       padding: EdgeInsets.symmetric(horizontal: 50),
       child: Column(
         children: [
@@ -67,9 +70,13 @@ class __FormState extends State<_Form> {
           // TODO: crear boton
           BtnAzulWidget(
             title: 'Ingrese',
-            onpress: () {
-              print('valores');
-            },
+            onpress: !authService.autenticando
+                ? () {
+                    authService.autenticando = true;
+                    FocusScope.of(context).unfocus();
+                    authService.login(emailCtrl.text.trim(), passCtrl.text.trim());
+                  }
+                : null,
           ),
         ],
       ),
